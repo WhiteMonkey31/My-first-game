@@ -1,5 +1,8 @@
 #include<windows.h>
 
+
+bool running = true;
+
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lParam) {
 	return DefWindowProc(hwnd, uMsg, uParam, lParam);
 }

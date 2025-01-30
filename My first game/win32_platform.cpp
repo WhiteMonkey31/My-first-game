@@ -4,7 +4,18 @@
 bool running = true;
 
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lParam) {
-	return DefWindowProc(hwnd, uMsg, uParam, lParam);
+	LRESULT result = 0;
+	switch (uMsg) {
+		case WM_CLOSE:
+		case WM_DESTROY: {
+			running = false;
+			break;
+		}
+		default: {
+			result = DefWindowProc(hwnd, uMsg, uParam, lParam);
+		}
+	}
+	return result;
 }
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int nShowCmd) {
 	//Create Window Class
@@ -17,11 +28,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int n
 	RegisterClass(&window_class);
 
 	//Create Window
-	CreateWindow(window_class.lpszClassName, "My First Cpp Game!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+	HWND window = CreateWindow(window_class.lpszClassName, "My First Cpp Game!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
 
 	while (running) {
 		//Input
-
+		MSG message;
+		while (PeekMessage(&message, window, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+		}
 		//Simulate
 
 		//Render

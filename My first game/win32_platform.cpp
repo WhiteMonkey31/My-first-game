@@ -62,7 +62,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int n
 	RegisterClass(&window_class);
 
 	//Create Window
-	HWND window = CreateWindow(window_class.lpszClassName, "My First Cpp Game!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, 0, 0, hInstance, 0);
+	HWND window = CreateWindow(window_class.lpszClassName, "My First Cpp Game!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
 	HDC hdc = GetDC(window);
 
 	Input input = {};
@@ -95,8 +95,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int n
 
 #define process_button(b,vk)\
 case vk: {\
+input.buttons[b].changed = is_down != input.buttons[b].is_down;\
 input.buttons[b].is_down = is_down;\
-input.buttons[b].changed = true;\
 break;\
 }
 

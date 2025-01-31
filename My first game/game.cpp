@@ -3,9 +3,11 @@
 #define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
+// declearing all the variable for making those objects
 float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2.5, player_half_size_y = 12;
+float ball_p_x, ball_p_y, ball_dp_x = 100, ball_dp_y;
 
 internal void
 stimulate_game(Input* input, float dt) {
@@ -51,7 +53,11 @@ stimulate_game(Input* input, float dt) {
 		player_2_dp = 0; //make 0 to -50 or more in case you want to bouns back after collision
 	}
 
-	draw_rect(0, 0, 1, 1, 0xffffff);
+	// code for ball moverment
+	ball_p_x += ball_dp_x * dt;
+	ball_p_y += ball_dp_y * dt;
+
+	draw_rect(ball_p_x, ball_p_y, 1, 1, 0xffffff);
 
 	draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xff0000);
 	draw_rect(-80, player_2_p, player_half_size_x, player_half_size_y, 0xff0000);

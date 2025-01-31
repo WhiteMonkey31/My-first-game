@@ -30,7 +30,7 @@ stimulate_game(Input* input, float dt) {
 	player_1_dpp -= player_1_dp * 10.f;
 	player_2_dpp -= player_2_dp * 10.f;
 	
-	player_1_p = player_1_p + player_1_dp * dt + player_1_dpp * dt * dt * 0.005f; // change 0.005f more or less to change player speed
+	player_1_p = player_1_p + player_1_dp * dt + player_1_dpp * dt * dt * 0.002f; // change 0.005f more or less to change player speed
 	player_1_dp = player_1_dp + player_1_dpp * dt;
 
 	//player 1 collosion code
@@ -68,12 +68,36 @@ stimulate_game(Input* input, float dt) {
 		ball_p_y - ball_half_size < player_1_p + player_half_size_y ) {
 			ball_p_x = 80 - player_half_size_x - ball_half_size;
 			ball_dp_x *= -1;
+			ball_dp_y = (ball_p_y - player_1_p) * 2 + player_1_dp * 0.75f; // changing ball direction after collosion 
 	}else if (ball_p_x + ball_half_size > -80 + player_half_size_x &&
 		ball_p_x - ball_half_size < -80 + player_half_size_x &&
 		ball_p_y + ball_half_size > player_2_p - player_half_size_y &&
 		ball_p_y - ball_half_size < player_2_p + player_half_size_y ) {
 			ball_p_x =-80 + player_half_size_x + ball_half_size;
 			ball_dp_x *= -1;
+			ball_dp_y = (ball_p_y - player_2_p) * 2 + player_2_dp * 0.75f;
+	}
+
+	// limiting ball to stay inside from vertical (up and down) collosion after player hit them
+	if (ball_p_y + ball_half_size > arena_half_size_y) {
+		ball_p_y = arena_half_size_y - ball_half_size;
+		ball_dp_y *= -1;
+	}else if (ball_p_y - ball_half_size < -arena_half_size_y) {
+		ball_p_y = -arena_half_size_y + ball_half_size;
+		ball_dp_y *= -1;
+	}
+
+	// bringing ball back to live after each game over
+	if (ball_p_x + ball_half_size > arena_half_size_x) {
+		ball_dp_x *= -1;
+		ball_dp_y = 0;
+		ball_p_x = 0;
+		ball_p_y = 0;
+	}else if (ball_p_x - ball_half_size < -arena_half_size_x) {
+		ball_dp_x *= -1;
+		ball_dp_y = 0;
+		ball_p_x = 0;
+		ball_p_y = 0;
 	}
 
 	draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xff0000); // player 1 graphic

@@ -29,13 +29,27 @@ stimulate_game(Input* input, float dt) {
 	player_1_p = player_1_p + player_1_dp * dt + player_1_dpp * dt * dt * 0.005f;
 	player_1_dp = player_1_dp + player_1_dpp * dt;
 
+	//player 1 collosion code
 	if (player_1_p + player_half_size_y > arena_half_size_y) {
 		player_1_p = arena_half_size_y - player_half_size_y;
-		player_1_dp = 0;
+		player_1_dp = 0; //make 0 to -50 or more in case you want to bouns back after collision
+	}else if (player_1_p - player_half_size_y < -arena_half_size_y) {
+		player_1_p = -arena_half_size_y + player_half_size_y;
+		player_1_dp = 0; //make 0 to -50 or more in case you want to bouns back after collision
 	}
 	
 	player_2_p = player_2_p + player_2_dp * dt + player_2_dpp * dt * dt * 0.005f;
 	player_2_dp = player_2_dp + player_2_dpp * dt;
+
+	//player 2 collosion code
+	if (player_2_p + player_half_size_y > arena_half_size_y) {
+		player_2_p = arena_half_size_y - player_half_size_y;
+		player_2_dp = 0; //make 0 to -50 or more in case you want to bouns back after collision
+	}
+	else if (player_2_p - player_half_size_y < -arena_half_size_y) {
+		player_2_p = -arena_half_size_y + player_half_size_y;
+		player_2_dp = 0; //make 0 to -50 or more in case you want to bouns back after collision
+	}
 
 	draw_rect(0, 0, 1, 1, 0xffffff);
 

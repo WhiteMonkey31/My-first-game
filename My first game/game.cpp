@@ -61,9 +61,19 @@ stimulate_game(Input* input, float dt) {
 
 	draw_rect(ball_p_x, ball_p_y, 1, 1, 0xffffff); // ball graphic
 
-	if (ball_p_x + ball_half_size > 80 - player_half_size_x) {
-		ball_p_x = 80 - player_half_size_x - ball_half_size;
-		ball_dp_x *= -1;
+	//ball collision 
+	if (ball_p_x + ball_half_size > 80 - player_half_size_x &&
+		ball_p_x - ball_half_size < 80 + player_half_size_x &&
+		ball_p_y + ball_half_size > player_1_p - player_half_size_y &&
+		ball_p_y - ball_half_size < player_1_p + player_half_size_y ) {
+			ball_p_x = 80 - player_half_size_x - ball_half_size;
+			ball_dp_x *= -1;
+	}else if (ball_p_x + ball_half_size > -80 + player_half_size_x &&
+		ball_p_x - ball_half_size < -80 + player_half_size_x &&
+		ball_p_y + ball_half_size > player_2_p - player_half_size_y &&
+		ball_p_y - ball_half_size < player_2_p + player_half_size_y ) {
+			ball_p_x =-80 + player_half_size_x + ball_half_size;
+			ball_dp_x *= -1;
 	}
 
 	draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xff0000); // player 1 graphic

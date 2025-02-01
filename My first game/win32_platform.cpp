@@ -65,7 +65,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int n
 	RegisterClass(&window_class);
 
 	//Create Window										// below is the window title (you can achange it as what ever you like)
-	HWND window = CreateWindow(window_class.lpszClassName, "Pong Game - Tutorial", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+	HWND window = CreateWindow(window_class.lpszClassName, "Pong Game - Made by Saif-ur-Rehman Awan!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
 	{
 		// Full Screen    (you can comment all this out if you don't want full screen feature turn on)
 		

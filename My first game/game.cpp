@@ -7,7 +7,7 @@
 float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2.5, player_half_size_y = 12;
-float ball_p_x, ball_p_y, ball_dp_x = 100, ball_dp_y, ball_half_size = 1;
+float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1; // ball_dp_x is the ball speed (you can increase or decrease it from here)
 int player_1_score, player_2_score;
 
 
@@ -51,8 +51,11 @@ stimulate_game(Input* input, float dt) {
 	if (is_down(BUTTON_UP)) player_1_dpp += 2000;
 	if (is_down(BUTTON_DOWN)) player_1_dpp -= 2000;
 #else
-	if (ball_p_y > player_1_p) player_1_dpp += 2000;
-	if (ball_p_y < player_1_p) player_1_dpp -= 2000;
+	//if (ball_p_y > player_1_p + 2.5f) player_1_dpp += 1300;
+	//if (ball_p_y < player_1_p - 2.5f) player_1_dpp -= 1300;
+	player_1_dpp = (ball_p_y - player_1_p) * 100;
+	if (player_1_dpp > 1300) player_1_dpp = 1300;
+	if (player_1_dpp < -1300) player_1_dpp = -1300;
 #endif
 	// controls moment for player 2
 	float player_2_dpp = 0.f;

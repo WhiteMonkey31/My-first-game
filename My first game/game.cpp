@@ -47,10 +47,13 @@ stimulate_game(Input* input, float dt) {
 
 	//comtrols moment for player 1
 	float player_1_dpp = 0.f;
-
+#if 0
 	if (is_down(BUTTON_UP)) player_1_dpp += 2000;
 	if (is_down(BUTTON_DOWN)) player_1_dpp -= 2000;
-	
+#else
+	if (ball_p_y > player_1_p) player_1_dpp += 2000;
+	if (ball_p_y < player_1_p) player_1_dpp -= 2000;
+#endif
 	// controls moment for player 2
 	float player_2_dpp = 0.f;
 	if (is_down(BUTTON_W)) player_2_dpp += 2000;

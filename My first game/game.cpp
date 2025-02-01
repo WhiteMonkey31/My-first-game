@@ -148,6 +148,9 @@ stimulate_game(Input* input, float dt) {
 			draw_text("MULTI PLAYER", 15, -10, 1, 0xff0000);
 		}
 		
+		draw_text("PONG TOTURIAL", -73, 40, 2, 0xffffff);
+		draw_text("WATCH THE STEP BY STEP TOTORIAL ON", -73, 22, 0.75, 0xffffff);
+		draw_text("YOUTUBE.COM/DANZAIDAN", -73, 15, 1.22, 0xffffff);
 
 	}
 }

@@ -256,6 +256,22 @@ const char* letters[][7] = {
 	"0",
 	"0000",
 
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"0",
+
+	"   0",
+	"  0",
+	"  0",
+	" 0",
+	" 0",
+	"0",
+	"0",
+
 };
 
 internal void
@@ -265,11 +281,15 @@ draw_text(const char* text,float x,float y,float size, u32 color) {
 
 	while (*text) {
 		if (*text != 32) { // the if statement will work in case of white space inside the text, and will skip one charcter
-			const char** a_letter = letters[*text - 'A'];
+			const char** letter;
+			if (*text == 47) letter = letters[27];
+			else if (*text == 46) letter = letters[26];
+			else letter = letters[*text - 'A'];
+
 			float original_x = x;
 
 			for (int i = 0; i < 7; i++) {
-				const char* row = a_letter[i];
+				const char* row = letter[i];
 				while (*row) {
 					if (*row == '0') {
 						draw_rect(x, y, half_size, half_size, color);

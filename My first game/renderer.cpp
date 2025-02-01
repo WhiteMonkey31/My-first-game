@@ -96,13 +96,13 @@ const char* letters[][7] = {
 	"0",
 	"0",
 
-	"0000",	
-	"0  0",
+	" 000",	
+	"0  ",
 	"0",
-	"0 0000",
-	"0  0 0",
+	"0 00",
 	"0  0",
-	"0000",
+	"0  0",
+	" 000",
 
 	"0  0",
 	"0  0",
@@ -176,11 +176,11 @@ const char* letters[][7] = {
 	"0",
 	"0",
 
-	" 00",
-	"0  0",
-	"0  0",
-	"0  0",
-	"0  0",
+	" 000",
+	"0   0",
+	"0   0",
+	"0   0",
+	"0 0 0",
 	"0  0",
 	" 00 0",
 
@@ -264,20 +264,22 @@ draw_text(const char* text,float x,float y,float size, u32 color) {
 	float original_y = y;
 
 	while (*text) {
-		const char** a_letter = letters[*text - 'A'];
-		float original_x = x;
+		if (*text != 32) { // the if statement will work in case of white space inside the text, and will skip one charcter
+			const char** a_letter = letters[*text - 'A'];
+			float original_x = x;
 
-		for (int i = 0; i < 7; i++) {
-			const char* row = a_letter[i];
-			while (*row) {
-				if (*row == '0') {
-					draw_rect(x, y, half_size, half_size, color);
+			for (int i = 0; i < 7; i++) {
+				const char* row = a_letter[i];
+				while (*row) {
+					if (*row == '0') {
+						draw_rect(x, y, half_size, half_size, color);
+					}
+					x += size;
+					row++;
 				}
-				x += size;
-				row++;
+				y -= size;
+				x = original_x;
 			}
-			y -= size;
-			x = original_x;
 		}
 		text++;
 		x += size * 6.f;

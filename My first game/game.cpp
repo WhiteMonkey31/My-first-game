@@ -140,14 +140,14 @@ stimulate_game(Input* input, float dt) {
 			enemy_is_ai = hot_button ? 0 : 1;
 		}
 		if (hot_button == 0) {
-			draw_rect(20, 0, 10, 10, 0xff0000);
-			draw_rect(-20, 0, 10, 10, 0xcccccc);
+			draw_text("SINGLE PLAYER", -85, -10, 1, 0xff0000);
+			draw_text("MULTI PLAYER", 15, -10, 1, 0xcccccc);
 		}
 		else {
-			draw_rect(20, 0, 10, 10, 0xcccccc);
-			draw_rect(-20, 0, 10, 10, 0xff0000);
+			draw_text("SINGLE PLAYER", -85, -10, 1, 0xcccccc);
+			draw_text("MULTI PLAYER", 15, -10, 1, 0xff0000);
 		}
-		draw_text("ABCDEFGHIJKLMNOPQRSTUVWXYZ", -80, 0, 1, 0xff00ff);
+		
 
 	}
 }

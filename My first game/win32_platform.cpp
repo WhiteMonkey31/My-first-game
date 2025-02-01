@@ -52,6 +52,9 @@ LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lPa
 	return result;
 }
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int nShowCmd) {
+
+	//ShowCursor(FALSE); // making cursor disapper when it is inside game window, (HINT: you can comment this out if you don't want this feature on)
+
 	//Create Window Class
 	WNDCLASS window_class = {};
 	window_class.style = CS_HREDRAW | CS_VREDRAW;
@@ -61,9 +64,22 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int n
 	//Register CLass
 	RegisterClass(&window_class);
 
-	//Create Window
-	HWND window = CreateWindow(window_class.lpszClassName, "My First Cpp Game!", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+	//Create Window										// below is the window title (you can achange it as what ever you like)
+	HWND window = CreateWindow(window_class.lpszClassName, "Pong Game - Tutorial", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+	{
+		// Full Screen    (you can comment all this out if you don't want full screen feature turn on)
+		
+		//SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+		//MONITORINFO mi = { sizeof(mi) };
+		//GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+		//SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+
+	}
+	
+	
 	HDC hdc = GetDC(window);
+
+	
 
 	Input input = {};
 

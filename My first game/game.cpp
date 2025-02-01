@@ -8,6 +8,8 @@ float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2.5, player_half_size_y = 12;
 float ball_p_x, ball_p_y, ball_dp_x = 100, ball_dp_y, ball_half_size = 1;
+int player_1_score, player_2_score;
+
 
 internal void
 stimulate_player(float* p, float* dp, float ddp, float dt) {
@@ -92,13 +94,27 @@ stimulate_game(Input* input, float dt) {
 			ball_dp_y = 0;
 			ball_p_x = 0;
 			ball_p_y = 0;
+			player_1_score++;
 		}
 		else if (ball_p_x - ball_half_size < -arena_half_size_x) {
 			ball_dp_x *= -1;
 			ball_dp_y = 0;
 			ball_p_x = 0;
 			ball_p_y = 0;
+			player_2_score++;
 		}
+	}
+
+	// showing player score by box on both sides top
+	float at_x = -80;
+	for (int i = 0; i < player_1_score; i++) {
+		draw_rect(at_x, 47.f, 1.f, 1.f, 0xaaaaaa);
+		at_x += 2.5f;
+	}
+	at_x = 80;
+	for (int i = 0; i < player_2_score; i++) {
+		draw_rect(at_x, 47.f, 1.f, 1.f, 0xaaaaaa);
+		at_x -= 2.5f;
 	}
 
 	//renering

@@ -46,3 +46,19 @@ draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 
 	draw_rect_in_pixels(x0, y0, x1, y1, color);
 }
+
+// rendering score numbers
+internal void
+draw_number(int number, float x, float y, float size, u32 color) {
+	float half_size = size * 0.5f;
+	switch (number) {
+		case 0: {
+			draw_rect(x - size, y, half_size, 2.5f * size, color);
+			draw_rect(x + size, y, half_size, 2.5f * size, color);
+			draw_rect(x, y + size * 2.f, half_size, half_size, color);
+			draw_rect(x, y - size * 2.f, half_size, half_size, color);
+			break;
+		}
+			  
+	}
+}

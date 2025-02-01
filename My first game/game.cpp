@@ -106,16 +106,8 @@ stimulate_game(Input* input, float dt) {
 	}
 
 	// showing player score by box on both sides top
-	float at_x = -80;
-	for (int i = 0; i < player_1_score; i++) {
-		draw_rect(at_x, 47.f, 1.f, 1.f, 0xaaaaaa);
-		at_x += 2.5f;
-	}
-	at_x = 80;
-	for (int i = 0; i < player_2_score; i++) {
-		draw_rect(at_x, 47.f, 1.f, 1.f, 0xaaaaaa);
-		at_x -= 2.5f;
-	}
+	draw_number(player_1_score, -10, 40, 1.f, 0xbbffbb);
+	draw_number(player_2_score, 10, 40, 1.f, 0xbbffbb);
 
 	//renering
 	draw_rect(ball_p_x, ball_p_y, ball_half_size, ball_half_size, 0xffffff); // ball graphic

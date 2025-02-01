@@ -135,6 +135,7 @@ stimulate_game(Input* input, float dt) {
 		if (pressed(BUTTON_LEFT) || pressed(BUTTON_RIGHT)) {
 			hot_button = !hot_button;
 		}
+		draw_text(0,0,1,0xff00ff);
 		if (pressed(BUTTON_ENTER)) {
 			current_gamemode = GM_GAMEPLAY;
 			enemy_is_ai = hot_button ? 0 : 1;

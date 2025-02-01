@@ -47,6 +47,36 @@ draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 	draw_rect_in_pixels(x0, y0, x1, y1, color);
 }
 
+const char* letters[][7] = {
+	" 00",
+	"0  0",
+	"0  0",
+	"0000",
+	"0  0",
+	"0  0",
+	"0  0",
+};
+
+internal void
+draw_text(float x,float y,float size, u32 color) {
+	float half_size = size * 0.5f;
+	float original_x = x;
+	const char** a_letter = letters[0];
+
+	for (int i = 0; i < 7; i++) {
+		const char* row = a_letter[i];
+		while (*row) {
+			if (*row == '0') {
+				draw_rect(x, y, half_size, half_size, color);
+			}
+			x += size;
+			row++;
+		}
+		y -= size;
+		x = original_x;
+	}
+}
+
 // rendering score numbers
 internal void
 draw_number(int number, float x, float y, float size, u32 color) {

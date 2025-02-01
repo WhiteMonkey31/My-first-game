@@ -46,6 +46,7 @@ enum Gamemode {
 
 Gamemode current_gamemode;
 int hot_button;
+bool enemy_is_ai;
 
 internal void
 stimulate_game(Input* input, float dt) {
@@ -56,16 +57,17 @@ stimulate_game(Input* input, float dt) {
 	if (current_gamemode == GM_GAMEPLAY) {
 		//comtrols moment for player 1
 		float player_1_dpp = 0.f;
-#if 0
-		if (is_down(BUTTON_UP)) player_1_dpp += 2000;
-		if (is_down(BUTTON_DOWN)) player_1_dpp -= 2000;
-#else
-		//if (ball_p_y > player_1_p + 2.5f) player_1_dpp += 1300;
-		//if (ball_p_y < player_1_p - 2.5f) player_1_dpp -= 1300;
-		player_1_dpp = (ball_p_y - player_1_p) * 100;
-		if (player_1_dpp > 1300) player_1_dpp = 1300;
-		if (player_1_dpp < -1300) player_1_dpp = -1300;
-#endif
+		if (enemy_is_ai) {
+			if (is_down(BUTTON_UP)) player_1_dpp += 2000;
+			if (is_down(BUTTON_DOWN)) player_1_dpp -= 2000;
+		}
+		else {
+			//if (ball_p_y > player_1_p + 2.5f) player_1_dpp += 1300;
+			//if (ball_p_y < player_1_p - 2.5f) player_1_dpp -= 1300;
+			player_1_dpp = (ball_p_y - player_1_p) * 100;
+			if (player_1_dpp > 1300) player_1_dpp = 1300;
+			if (player_1_dpp < -1300) player_1_dpp = -1300;
+		}
 		// controls moment for player 2
 		float player_2_dpp = 0.f;
 		if (is_down(BUTTON_W)) player_2_dpp += 2000;
@@ -129,7 +131,14 @@ stimulate_game(Input* input, float dt) {
 		draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xff0000); // player 1 graphic
 		draw_rect(-80, player_2_p, player_half_size_x, player_half_size_y, 0xff0000); // player 2 graphics
 	}
-	else {
+	else { // game menu
+		if (pressed(BUTTON_LEFT) || pressed(BUTTON_RIGHT)) {
+			hot_button = !hot_button;
+		}
+		if (pressed(BUTTON_ENTER)) {
+			current_gamemode = GM_GAMEPLAY;
+			enemy_is_ai = hot_button ? 0 : 1;
+		}
 		if (hot_button == 0) {
 			draw_rect(20, 0, 10, 10, 0xff0000);
 			draw_rect(-20, 0, 10, 10, 0xcccccc);
